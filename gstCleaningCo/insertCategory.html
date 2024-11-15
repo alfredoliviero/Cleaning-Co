@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="main.css" rel="stylesheet">
+        <title>CLEANME!</title>
+    </head>
+    <body>
+    <a href="index.html">HOME</a>
+        <h1>CREATE</h1>
+        <div class="box">
+        
+        <table>
+            <tr>
+                <td>
+                    <form onsubmit="handleSubmit(event)">
+                        <h2>CATEGORY</h2>
+                        <input class="inptext" type="text" id="categoryName" placeholder="INSERT NAME">
+                        <br>
+                            <input class="btn-submit"  type="submit" name="insert" value="CREATE">
+                    </form>
+                </td>
+            </tr>
+        </table>
+        </div>
+        <div class="container" id="createSquad"></div>
+    </body>
+    <script>
+        // Funzione per validare e gestire l'invio del modulo
+        function handleSubmit(event) {
+            // Prevenire il comportamento di submit del modulo (evitare ricaricamento pagina)
+            event.preventDefault();
+
+            // Ottieni i valori degli input
+            const categoryName = document.getElementById('categoryName').value;
+
+            // Validazione dei campi
+            if (!categoryName) {
+                alert('Please fill in all the fields!');
+                return;
+            }
+
+            // Simulazione del successo con un messaggio di conferma
+            const confirmationMessage = alert(`
+                 "${categoryName}" added successfully!`);
+
+            // A questo punto, i dati potrebbero essere inviati a un server usando AJAX (se necessario)
+            // Ad esempio: invio a un server (simulato con console log)
+            document.getElementById('createSquad').innerHTML = `<strong>Category name:</strong> ${categoryName}`;
+            
+            // A questo punto potresti reimpostare i campi del modulo, se desiderato
+            // document.querySelector('form').reset();
+        }
+    </script>
+</html>

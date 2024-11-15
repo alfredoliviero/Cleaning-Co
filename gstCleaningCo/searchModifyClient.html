@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="main.css" rel="stylesheet">
+        <title>CLEANME!</title>
+    </head>
+    <body>
+    <a href="index.html">HOME</a>
+        <div class="box">
+        <h1>SEARCH & MODIFY</h1>
+            <table>
+                <tr>
+                    <td>
+                        <form onsubmit="validateForm(event)" >
+                            <h2>CUSTOMER</h2>
+                                <input class="inptext" type="text" id="cNameRic" placeholder="INSERT NAME">
+                                <input class="inptext" type="text" id="cSurnameRic" placeholder="INSERT SURNAME">
+                                <input class="inptext" type="text" id="cCfRic" placeholder="INSERT TAX CODE">
+                                <br>
+                                    <input class="btn-submit" type="submit" value="FIND">
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="confirmationMessage"></div>
+    </body>
+</html>
+<script>
+        // Funzione per la validazione del modulo
+        function validateForm(event) {
+                // Prevenire l'invio del modulo
+                event.preventDefault();
+                
+                // Ottenere i valori dei campi
+                const name = document.getElementById('cNameRic').value;
+                const surname = document.getElementById('cSurnameRic').value;
+                const cf = document.getElementById('cCfRic').value;
+
+                // Validazione dei campi: controllare se sono vuoti
+                if (!name || !surname || !cf) {
+                    alert('All fields must be filled!');
+                    return false;
+                }
+
+                // Validazione del codice fiscale (semplificato per esempio)
+                const cfRegex = /^[A-Z0-9]{16}$/;
+                if (!cfRegex.test(cf)) {
+                    alert('Invalid tax code! Must be 16 characters long and contain only letters and numbers.');
+                    return false;
+                }  else{
+                    alert('Search successfully executed!');
+                    document.getElementById('confirmationMessage').innerHTML = `
+                    <p>Name: ${name}</p>
+                    <p>Surname: ${surname}</p>
+                    <p>Tax Code: ${cf}</p>
+                `;
+                }
+
+                // Se la validazione è corretta, mostra un messaggio di conferma
+                
+
+                // Qui si potrebbero fare altre azioni, come inviare i dati a un server tramite AJAX
+            }
+</script>

@@ -1,0 +1,117 @@
+CREATE TABLE categoria_operai(
+id_categoria integer,
+nome_categoria varchar(25),
+stipendio_categoria double,
+PRIMARY KEY (id_categoria)
+)
+
+CREATE TABLE cliente(
+cf_cliente varchar(16),
+nome_cliente varchar(10),
+cognome_cliente varchar(10),
+user_cliente varchar(10),
+psw_cliente	varchar(10),
+PRIMARY KEY (cf_cliente)
+)
+
+CREATE TABLE contratti(
+cf_cliente varchar(16),
+id_indirizzoSede integer,
+    FOREIGN KEY (cf_cliente) REFERENCES cliente(cf_cliente),
+    FOREIGN KEY (id_indirizzoSede) REFERENCES indirizzo_sede(id_indirizzoSede)
+)
+
+
+
+CREATE TABLE esegue(
+id_lavorazione integer,
+
+id_associazione integer,
+id_indirizzoSede integer,
+id_comprende integer,
+incarico_pagato BOOLEAN,
+incarico_completato BOOLEAN,
+incarico_confermato BOOLEAN,
+acconto double,
+prezzo_vendita double,
+id_squadra integer,
+FOREIGN KEY (id_squadra) REFERENCES squadra(id_squadra),
+FOREIGN KEY (id_lavorazione) REFERENCES lavorazioni(id_lavorazione),
+
+FOREIGN KEY (id_associazione) REFERENCES formazione_squadra(id_associazione),
+FOREIGN KEY (id_indirizzoSede) REFERENCES indirizzo_sede(id_indirizzoSede),
+FOREIGN KEY (id_comprende) REFERENCES pacchetto_comprende(id_comprende)
+)
+
+CREATE TABLE formazione_squadra(
+id_associazione integer AUTO_INCREMENT,
+cf_operaio varchar(16),
+id_squadra integer,
+responsabile_squadra BOOLEAN,
+data_creazione_squadra date,
+PRIMARY KEY(id_associazione),	
+FOREIGN KEY (cf_operaio) REFERENCES operai(cf_operaio), 
+FOREIGN KEY (id_squadra) REFERENCES squadra(id_squadra)
+)
+
+CREATE TABLE lavorazioni(
+id_lavorazione integer AUTO INCREMENT,
+descrizione_intervento	 varchar(100),
+prezzo_totale double,
+data_prenotazione_lavorazione date,
+data_esecuzione_lavorazione date,
+PRIMARY KEY (id_lavorazione)
+)
+
+CREATE TABLE operai(
+cf_operaio varchar(16),
+id_categoria integer,
+nome_operaio varchar(10),
+cognome_operaio varchar(10),
+operativita BOOLEAN,
+user_operaio varchar(10),
+psw_operaio varchar(10),
+PRIMARY KEY (cf_operaio),
+FOREIGN KEY(id_categoria) REFERENCES categoria_operai(id_categoria)
+)
+
+CREATE TABLE pacchetto_comprende( id_comprende integer AUTO_INCREMENT, id_servizio integer, id_lavorazione integer, descrizione_comprende varchar(50), data_associazione date, PRIMARY KEY (id_comprende), FOREIGN KEY (id_servizio) REFERENCES servizio(id_servizio), FOREIGN KEY (id_lavorazione) REFERENCES lavorazioni(id_lavorazione) );
+
+CREATE TABLE sede(
+nome_sede varchar(10),
+
+id_indirizzoSede integer,
+id_sede integer AUTO_INCREMENT,
+PRIMARY KEY (id_sede),
+
+FOREIGN KEY (id_indirizzoSede) REFERENCES indirizzo_sede(id_indirizzoSede)
+)
+
+CREATE TABLE indirizzo_sede(
+capSede integer(5),
+cittaSede varchar(20),
+viaSede varchar(20),
+pianoSede varchar(3),
+internoSede varchar(3),
+id_indirizzoSede integer AUTO_INCREMENT,
+cf_cliente varchar(16),
+PRIMARY KEY(id_indirizzoSede) ,
+FOREIGN KEY (cf_cliente) REFERENCES cliente(cf_cliente)
+)
+
+CREATE TABLE servizio(
+id_servizio integer AUTO INCREMENT,
+descrizione_servizio varchar(100),
+prezzo_servizio double,
+PRIMARY KEY (id_servizio)
+)
+
+CREATE TABLE squadra(
+id_squadra integer AUTO_INCREMENT,
+nome_squadra varchar(10),
+descrizione_squadra varchar(20),
+operativitaSquadra BOOLEAN,
+giornoOperativ	date,
+finta BOOLEAN,
+PRIMARY KEY (id_squadra)
+)

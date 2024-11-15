@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="main.css" rel="stylesheet">
+        <title>CLEANME!</title>
+    </head>
+    <body>
+    <a href="index.html">HOME</a>
+    <h1>CREATE</h1>
+        <div class="box">
+            <table>
+                <tr>
+                    <td>
+                    <h2>SQUAD</h2>      
+                        <form  onsubmit="handleSubmit(event)">
+                            <input class="inptext" type="text" id="nomeSquadra" placeholder="INSERT NAME" >
+                            <h3>Availability</h3>
+                                <input class="inptext" type="date" name="DateOp" >
+                                <br>
+                                    <input class="btn-submit" type="submit" name="insert" value="CREATE">
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="container" id="createSquad"></div>
+    </body>
+    <script>
+        // Funzione per validare e gestire l'invio del modulo
+        function handleSubmit(event) {
+            // Prevenire il comportamento di submit del modulo (evitare ricaricamento pagina)
+            event.preventDefault();
+
+            // Ottieni i valori degli input
+            const nomeSquadra = document.getElementById('nomeSquadra').value;
+            const dateOp = document.querySelector('input[name="DateOp"]').value;
+
+            // Validazione dei campi
+            if (!nomeSquadra || !dateOp) {
+                alert('Please fill in all the fields!');
+                return;
+            }
+
+            // Simulazione del successo con un messaggio di conferma
+            const confirmationMessage = `
+                Squad "${nomeSquadra}" added successfully! 
+                Availability: ${dateOp}`;
+
+            // Mostra il messaggio di conferma
+            alert(confirmationMessage);
+
+            // A questo punto, i dati potrebbero essere inviati a un server usando AJAX (se necessario)
+            // Ad esempio: invio a un server (simulato con console log)
+            document.getElementById('createSquad').innerHTML = `<strong>Squad summary:</strong><br> <strong>Squad name:</strong> ${nomeSquadra} <br><strong> Availability:</strong> ${dateOp}`;
+            
+            // A questo punto potresti reimpostare i campi del modulo, se desiderato
+            // document.querySelector('form').reset();
+        }
+    </script>
+</html>

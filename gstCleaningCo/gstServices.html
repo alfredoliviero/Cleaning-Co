@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="gstServices.js" defer></script>
+    <link href="main.css" rel="stylesheet">
+    <title>CLEANME!</title>
+</head>
+<body>
+    <a href="index.html">HOME</a>
+        <h1>CREATE</h1>
+        <div class="box">
+            <table>
+                <tr>
+                    <td>
+            <form id="serviceForm">
+                <h2>SERVICE</h2>
+                    <input class="inptext" type="text" name="id_servizio" hidden>
+                    <input class="inptext" type="text" id="descrizione_servizio" name="descrizione_servizio" placeholder="SERVICE NAME" required>
+                    <input class="inptext" type="number" id="prezzo_servizio" name="prezzo_servizio" placeholder="SERVICE PRICE" required>
+                    <br>
+                    <input class="btn-submit" type="submit" value="CREATE">
+            </form>
+            <div id="message"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

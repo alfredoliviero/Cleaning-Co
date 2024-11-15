@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="main.css" rel="stylesheet">
+    <title>CLEANME!</title>
+</head>
+<body>
+    <a href="index.html">HOME</a>
+    <h1>CREATE NEW ORDER</h1>
+    <div class="box">
+        <table>
+            <tr>
+                <td>
+                    <form id="orderForm">
+                        <h2>COSTUMER</h2>
+                        <label for="optSquad"></label>
+                            <select class="inptext" id="optSquad" required>
+                                <option value="" disabled selected>SQUAD</option>
+                                <option value="ALPHA">ALPHA</option>
+                                <option value="BETA">BETA</option>
+                                <option value="DELTA">DELTA</option>
+                            </select>
+                            <br>
+                        <label for="optAddress"></label>
+                            <select class="inptext" id="optAddress" required>
+                                <option value="" disabled selected>ADDRESS</option>
+                                <option value="Otto-Braun-Straße 65">Otto-Braun-Straße 65</option>
+                                <option value="Oranienburger Str. 65">Oranienburger Str. 65</option>
+                                <option value="Viktoriapark">Viktoriapark</option>
+                            </select>
+                            <br>
+                        <label for="optDate"></label>
+                            <input class="inptext" type="date" id="optDate" name="orderDate">
+                            <br>
+                        <label for="optCheckServices">SERVICES:</label>
+                        <br>
+                            <input type="checkbox" id="service1" value="1"> sweep
+                            <input type="checkbox" id="service2" value="2"> floor washing
+                            <input type="checkbox" id="service3" value="3"> wall washing
+                            <input type="checkbox" id="service4" value="4"> furniture polishing
+                        <br>
+                        <input class="btn-submit" type="submit" name="orderConfirm" value="SEND">
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="container" id="orderSummary"></div>
+
+    <script>
+        // Funzione per raccogliere e visualizzare il riepilogo dell'ordine
+        document.getElementById('orderForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Impedisce l'invio predefinito del form
+
+            // Recupera i valori selezionati
+            const squad = document.getElementById('optSquad').value;
+            const address = document.getElementById('optAddress').value;
+            const orderDate = document.getElementById('optDate').value;
+            const selectedServices = [];
+            
+            // Verifica quali checkbox sono selezionate
+            if (document.getElementById('service1').checked) {
+                selectedServices.push("sweep");
+            }
+            if (document.getElementById('service2').checked) {
+                selectedServices.push("floor washing");
+            }
+            if (document.getElementById('service3').checked) {
+                selectedServices.push("wall washing");
+            }
+            if (document.getElementById('service4').checked) {
+                selectedServices.push("furniture polishing");
+            }
+
+            // Verifica che tutti i campi siano compilati
+            if (!squad || !address || !orderDate || selectedServices.length === 0) {
+                alert('Please fill out all fields!');
+                return;
+            }else{
+                alert('Order successfully submitted');
+            }
+
+            // Crea un riepilogo dell'ordine
+            const orderSummary = `
+                <h3>Order Summary: </h3>
+                <p><strong>Squad:</strong> ${squad}</p>
+                <p><strong>Address:</strong> ${address}</p>
+                <p><strong>Date:</strong> ${orderDate}</p>
+                <p><strong>Services:</strong> ${selectedServices.join(', ')}</p>
+            `;
+
+            // Mostra il riepilogo
+            document.getElementById('orderSummary').innerHTML = orderSummary;
+        });
+    </script>
+</body>
+</html>

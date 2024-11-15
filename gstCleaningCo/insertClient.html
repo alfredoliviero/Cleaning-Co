@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href="main.css" rel="stylesheet">
+        <title>CLEANME!</title>
+    </head>
+    <body>
+    <a href="index.html">HOME</a>
+        <div>
+            <h1>INSERT CUSTOMER</h1>
+            <table>
+                <tr>
+                    <td>
+                        <div class="box">
+                        <form id="insertClient">
+                                <h2>CUSTOMER</h2>
+                            <input class="inptext"  type="text" id="cNameInsert" placeholder="INSERT NAME" required>
+                            <input class="inptext" type="text" id="cSurnameInsert" placeholder="INSERT SURNAME" required>
+                            <input class="inptext" type="text" id="cCfInsert" placeholder="INSERT TAX CODE" required>
+                            <input class="inptext" type="password" id="cPswInsert" placeholder="INSERT PASSWORD" required>
+                                <h2>OFFICE</h2>    
+                            <input class="inptext" type="text" id="cViaSede" placeholder="INSERT ADDRESS"required>
+                            <input class="inptext" type="number" min="0" max="99999" id="cCapSede" placeholder="CAP" required>
+                            <input class="inptext" type="text" id="cCittaSede" placeholder="INSERT CITY" required>
+                            <input class="inptext" type="number" min="-5" max="99" id="cPianoSede" placeholder="FLOOR" required>
+                            <input class="inptext" type="text" id="cInternoSede" placeholder="INSERT INTERN" required>
+                            <br>
+                                    <input class="btn-submit" type="submit" value="INSERT">
+                        </form>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            document.getElementById("insertClient").addEventListener('submit', function(event) {
+                event.preventDefault();
+            const cNameInsert = document.getElementById("cNameInsert").value;
+            const cSurnameInsert = document.getElementById("cSurnameInsert").value;
+            const cCfInsert = document.getElementById("cCfInsert").value;
+            const cPswInsert = document.getElementById("cPswInsert").value;
+            const cViaSede = document.getElementById("cViaSede").value;
+            const cCapSede = document.getElementById("cCapSede").value;
+            const cCittaSede = document.getElementById("cCittaSede").value;
+            const cPianoSede = document.getElementById("cPianoSede").value;
+            const cInternoSede = document.getElementById("cInternoSede").value;
+
+
+            // Validazione dei dati
+            if (!cNameInsert || !cSurnameInsert || !cCfInsert || !cPswInsert || !cViaSede || !cCapSede || !cCittaSede || !cPianoSede || !cInternoSede) {
+                alert("Please fill in all the fields!");
+                return; // Interrompe l'esecuzione se manca un campo
+            }
+
+            // Crea un oggetto con i dati
+            const clientData = {
+                name: cNameInsert,
+                surname: cSurnameInsert,
+                fiscalCode: cCfInsert,
+                password: cPswInsert,
+                office: {
+                    address: cViaSede,
+                    cap: cCapSede,
+                    city: cCittaSede,
+                    floor: cPianoSede,
+                    intern: cInternoSede
+                }
+            };
+
+            // Memorizza i dati nel localStorage (come esempio)
+            let clients = JSON.parse(localStorage.getItem('clients')) || [];  // Recupera i dati precedenti se ci sono
+            clients.push(clientData);  // Aggiungi il nuovo cliente
+            localStorage.setItem('clients', JSON.stringify(clients));  // Salva di nuovo i dati nel localStorage
+
+            // Visualizza un messaggio di successo
+            alert("Client added successfully!");
+
+            // Pulisce il form
+            document.getElementById("insertClient").reset();
+      
+                
+
+
+            });
+
+           
+
+        </script>
+    </body>
+</html>

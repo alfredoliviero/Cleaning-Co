@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <link href="main.css" rel="stylesheet">
+        <title>CLEANME!</title>
+    </head>
+    <body>
+    <a href="index.html">HOME</a>
+        <div class="box">
+            <h1>DELETE CUSTOMER</h1>
+            <table>
+                <tr>
+                    <td>
+                        <form onsubmit="validateForm(event)">
+                            <input class="inptext" type="text" id="cNameDelete" placeholder="INSERT NAME">
+                            <input class="inptext" type="text" id="cSurnameDelete" placeholder="INSERT SURNAME">
+                            <input class="inptext" type="text" id="cCfDelete" placeholder="INSERT TAX CODE" required>
+                            <br>
+                                <input class="btn-submit-wrng" type="submit" value="DELETE">
+                        </form>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <script>
+            // Funzione per la validazione del modulo
+            function validateForm(event) {
+                // Prevenire l'invio del modulo
+                event.preventDefault();
+                
+                // Ottenere i valori dei campi
+                const name = document.getElementById('cNameDelete').value;
+                const surname = document.getElementById('cSurnameDelete').value;
+                const cf = document.getElementById('cCfDelete').value;
+
+                // Validazione dei campi: controllare se sono vuoti
+                if (!name || !surname || !cf) {
+                    alert('Please fill in all the fields!');
+                    return false;
+                }
+
+                // Validazione del codice fiscale (semplificato per esempio)
+                const cfRegex = /^[A-Z0-9]{16}$/;
+                if (!cfRegex.test(cf)) {
+                    alert('Invalid tax code! Must be 16 characters and contain only letters and numbers..');
+                    return false;
+                }
+
+                // Conferma di eliminazione
+                const confirmDelete = confirm(`Are you sure you want to eliminate the Customer ${name} ${surname} with the tax code ${cf}?`);
+                if (confirmDelete) {
+                    // Se confermato, simula l'invio del modulo
+                    alert('Customer successfully eliminated!');
+                    // Qui potrebbe essere inserita una chiamata AJAX per eliminare il cliente dal database senza ricaricare la pagina.
+                    // In caso contrario, puoi usare una normale azione del modulo (es. invio POST).
+                    // document.forms[0].submit();  // Se devi realmente inviare il modulo.
+                } else {
+                    // Se l'utente annulla l'operazione
+                    alert('Operation aborted.');
+                }
+            }
+        </script>
+
+    </body>
+</html>
